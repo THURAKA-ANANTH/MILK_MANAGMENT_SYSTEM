@@ -1,0 +1,45 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<h2>Generate Invoice for {{ customer.name }}</h2>
+
+<form method="post" id="invoiceForm">
+    {% csrf_token %}
+    
+    <p>
+        <label for="from_date">From Date:</label>
+        {{ form.from_date }}
+    </p>
+    
+    <p>
+        <label for="to_date">To Date:</label>
+        {{ form.to_date }}
+    </p>
+
+    <button type="submit" class="button button-primary">Generate Invoice</button>
+</form>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    let fromDateInput = document.querySelector("#id_from_date");
+    let toDateInput = document.querySelector("#id_to_date");
+    let form = document.querySelector("#invoiceForm");
+
+    // Ensure fields start empty
+    fromDateInput.value = "";
+    toDateInput.value = "";
+
+    form.addEventListener("submit", function(event) {
+        let fromDate = new Date(fromDateInput.value);
+        let toDate = new Date(toDateInput.value);
+
+        // Prevent submission if dates are invalid
+        if (fromDateInput.value && toDateInput.value && toDate < fromDate) {
+            alert("To Date must be greater than or equal to From Date.");
+            event.preventDefault();
+        }
+    });
+});
+</script>
+
+{% endblock %}
