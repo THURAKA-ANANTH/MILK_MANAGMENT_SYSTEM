@@ -59,8 +59,6 @@ This is a **Django-based** Milk Management System for tracking milk records and 
    ```
    - Use the super admin credentials you created earlier to log in.  
 
-## 📷 Screenshots  
-*(Add images of your project UI here)*  
 
 ## 👤 Author  
 **THURAKA-ANANTH**  
