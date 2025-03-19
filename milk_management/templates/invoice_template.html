@@ -105,10 +105,10 @@
         <div class="invoice-container">
             <div class="invoice-header" style="margin-bottom: 10px;">
                 <!-- <img src="logo.png" alt="Company Logo"> -->
-                <h2>Shiva Kesava Milk Invoice</h2>
+                <h2>Shiva Kesava Dairy  Invoice</h2>
             </div>
             <div class="proprietor-details">
-                <p><strong>Proprietor:</strong>T. Prasanna Kumari</p>
+                <p><strong>Proprietor:</strong> T. Prasanna Kumari</p>
                 <p><strong>Phone:</strong> +91 7330914685</p>
                 <p><strong>Address:</strong> Nallayagaripalem, Chedimala, Gudur, Nellore - 524412, AP, India</p>
                 <p><strong>Invoice Number:</strong> <span id="invoice-number"></span></p>
@@ -130,31 +130,41 @@
             <table class="table table-bordered table-striped mt-3">
                 <thead class="table-dark">
                     <tr>
-                        <th>S.No</th>  <!-- ✅ Added Serial Number Column -->
+                        <th>S.No</th>
                         <th>Date</th>
                         <th>Shift</th>
                         <th>Fat %</th>
                         <th>Rate/Liter</th>
+                        <th>Rate (₹)</th>
                         <th>Quantity (L)</th>
-                        <th>Total Price</th>
+                        <th>Total Price (₹)</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for record in milk_records %}
                     <tr>
-                        <td>{{ forloop.counter }}</td>  <!-- ✅ Serial Number (Auto-increments) -->
+                        <td>{{ forloop.counter }}</td>
                         <td>{{ record.milk_entry_date|date:"d-m-Y" }}</td>
                         <td>{{ record.shift }}</td>
-                        <td>{{ record.fat_value }}</td>
-                        <td>{{ record.rate_per_liter }}</td>
-                        <td>{{ record.quantity }}</td>
+                        <td>{{ record.fat_value|floatformat:"1" }}</td>
+                        <td>{{ record.rate_per_liter|floatformat:"-2" }}</td>
+                        <td>{{ record.rate_per_day|floatformat:"2" }}</td>
+                        <td>{{ record.quantity}}</td>
                         <td><strong>₹{{ record.total_price }}</strong></td>
                     </tr>
                     {% endfor %}
                 </tbody>
+                <tfoot>
+                    <tr class="table-success">
+                        <td colspan="6" class="text-end"><strong>Total:</strong></td>
+                        <td><strong>{{ total_liters }} L</strong></td>
+                        <td><strong>₹{{ total_amount }}</strong></td>
+                    </tr>
+                </tfoot>
             </table>
             
-            <h4 class="text-end text-success">Grand Total: ₹{{ total_amount }}</h4>
+            
+           
         </div>
         <div class="text-center mt-4">
             <button class="btn btn-primary btn-lg" onclick="downloadPDF()">Download PDF</button>

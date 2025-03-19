@@ -25,11 +25,15 @@ def generate_invoice(request, customer_id):
 
     # Calculate total amount
     total_amount = sum(record.total_price for record in milk_records)
+    total_liters = sum(record.quantity for record in milk_records)
+    for record in milk_records:
+        record.rate_per_day = (record.fat_value * record.rate_per_liter)/10
 
     return render(request, "invoice_template.html", {
         "customer": customer,
         "milk_records": milk_records,
         "from_date": from_date,
         "to_date": to_date,
+        "total_liters": total_liters,
         "total_amount": total_amount
     })
