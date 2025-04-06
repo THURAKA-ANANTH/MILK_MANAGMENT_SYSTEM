@@ -11,7 +11,7 @@ from .models import MilkRecord
 
 @admin.register(MilkRecord)
 class MilkRecordAdmin(admin.ModelAdmin):
-    list_display = ('serial_number', 'customer', 'milk_entry_date', 'formatted_shift', 'fat_value', 'rate_per_liter', 'quantity', 'formatted_total_price')
+    list_display = ('serial_number', 'customer', 'milk_entry_date', 'formatted_shift', 'fat_value', 'get_rate_per_liter', 'quantity', 'formatted_total_price')
     list_filter = ('milk_entry_date', 'customer', 'shift')
     search_fields = ('customer__name', 'customer__can_number')
 
@@ -32,6 +32,11 @@ class MilkRecordAdmin(admin.ModelAdmin):
 
     formatted_total_price.short_description = "Total Price (₹)"
 
+    def get_rate_per_liter(self, obj):
+        """ Fetch rate per liter from the related Customer model """
+        return obj.customer.rate_per_liter_person
+
+    get_rate_per_liter.short_description = "Rate per Liter (₹)"
 
 
 # Date range form for invoice selection
@@ -62,7 +67,7 @@ class InvoiceDateRangeForm(forms.Form):
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('serial_number', 'name', 'can_number', 'address', 'generate_invoice_button')
+    list_display = ('serial_number', 'name', 'can_number','rate_per_liter_person' ,'address', 'generate_invoice_button')
     search_fields = ('name', 'can_number')
 
     def serial_number(self, obj):

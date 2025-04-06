@@ -119,6 +119,7 @@
                     <h4>Customer Details</h4>
                     <p><strong>Name:</strong> {{ customer.name }}</p>
                     <p><strong>Can Number:</strong> {{ customer.can_number }}</p>
+                    <p><strong>Rate/Liter:</strong> {{ customer.rate_per_liter_person|floatformat:"2"}}</p>
                     <p><strong>Address:</strong> {{ customer.address }}</p>
                 </div>
                 <div class="col-md-6 text-md-end">
@@ -134,7 +135,6 @@
                         <th>Date</th>
                         <th>Shift</th>
                         <th>Fat %</th>
-                        <th>Rate/Liter</th>
                         <th>Rate (₹)</th>
                         <th>Quantity (L)</th>
                         <th>Total Price (₹)</th>
@@ -147,7 +147,6 @@
                         <td>{{ record.milk_entry_date|date:"d-m-Y" }}</td>
                         <td>{{ record.shift }}</td>
                         <td>{{ record.fat_value|floatformat:"1" }}</td>
-                        <td>{{ record.rate_per_liter|floatformat:"-2" }}</td>
                         <td>{{ record.rate_per_day|floatformat:"2" }}</td>
                         <td>{{ record.quantity}}</td>
                         <td><strong>₹{{ record.total_price }}</strong></td>
@@ -156,7 +155,7 @@
                 </tbody>
                 <tfoot>
                     <tr class="table-success">
-                        <td colspan="6" class="text-end"><strong>Total:</strong></td>
+                        <td colspan="5" class="text-end"><strong>Total:</strong></td>
                         <td><strong>{{ total_liters }} L</strong></td>
                         <td><strong>₹{{ total_amount }}</strong></td>
                     </tr>
