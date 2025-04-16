@@ -15,11 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path('', admin.site.urls),
-     path('milk_management/', include('milk_management.urls')), 
+    path('admin/', admin.site.urls),  # admin at /admin/
+    path('', include('milk_management.urls')),  # milk_management app at root
 ]
+
 urlpatterns += staticfiles_urlpatterns()
