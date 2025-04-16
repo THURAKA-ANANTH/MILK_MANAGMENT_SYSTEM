@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -74,14 +76,20 @@ WSGI_APPLICATION = 'shiva_kesava_dairy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'shiva_kesava_milk_management',  # Change this to your database name
+#         'USER': 'postgres',  # Change this to your PostgreSQL username
+#         'PASSWORD': '9573',  # Change this to your PostgreSQL password
+#         'HOST': 'localhost',  # Keep this as 'localhost' if PostgreSQL is on your computer  # Default PostgreSQL port
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'shiva_kesava_milk_management',  # Change this to your database name
-        'USER': 'postgres',  # Change this to your PostgreSQL username
-        'PASSWORD': '9573',  # Change this to your PostgreSQL password
-        'HOST': 'localhost',  # Keep this as 'localhost' if PostgreSQL is on your computer  # Default PostgreSQL port
-    }
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+
+
 }
 
 
