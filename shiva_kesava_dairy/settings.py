@@ -28,8 +28,9 @@ SECRET_KEY = 'django-insecure-w)d9%!$fn^$k&9rk^5q(zq$wr_m+5vp$rf=&s02-4cfuuw&sxe
 DEBUG = True
 
 # ALLOWED_HOSTS = ['192.168.31.36', 'localhost', '127.0.0.1','https://milk-managment-system.onrender.com/']
-
 ALLOWED_HOSTS = ['*']
+
+
 # Application definition
 
 INSTALLED_APPS = [
